@@ -7,6 +7,6 @@ urlpatterns = [
     
     path('', blog_view, name='index'),
     path('single', blog_single, name='single'),
-    
+    path('post-<int:pid>', test, name='test'),
     
 ]
