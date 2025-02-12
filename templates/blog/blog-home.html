@@ -85,22 +85,13 @@
           <div class="single-post row">
             <div class="col-lg-3 col-md-3 meta-details">
               <ul class="tags">
-                <li>
-                  <a href="#">Food,</a>
-                </li>
-                <li>
-                  <a href="#">Technology,</a>
-                </li>
-                <li>
-                  <a href="#">Politics,</a>
-                </li>
-                <li>
-                  <a href="#">Lifestyle</a>
-                </li>
+
+                {{ post.category.all|join:", " }}
+                
               </ul>
               <div class="user-details row">
                 <p class="user-name col-lg-12 col-md-12 col-6">
-                  <a href="#">Mark wiens</a> <span class="lnr lnr-user"></span>
+                  <a href="#">{{post.author.get_full_name}}</a> <span class="lnr lnr-user"></span>
                 </p>
                 <p class="date col-lg-12 col-md-12 col-6">
                   <a href="#">{{post.published_date}}</a> <span class="lnr lnr-calendar-full"></span>
@@ -115,11 +106,13 @@
             </div>
             <div class="col-lg-9 col-md-9">
               <div class="feature-img">
-                <img class="img-fluid" src="{% static 'img/blog/feature-img1.jpg' %}" alt="" />
+                <img class="img-fluid" src="{{post.image.url}}" alt="" />
               </div>
-              <a class="posts-title" href="#"><h3>{{post.title}}</h3></a>
-              <p class="excert">{{post.content}}</p>
-              <a href="blog-single.html" class="primary-btn">View More</a>
+              <a class="posts-title" href={% url 'blog:single' pid=post.id %}><h3>{{post.title}}</h3></a>
+              <p class="excert">{{post.content}}
+                {{post.image.url}}
+              </p>
+              <a href={% url 'blog:single' pid=post.id %} class="primary-btn">View More</a>
             </div>
           </div>
           {%endfor%}
@@ -158,7 +151,7 @@
               </form>
             </div>
             <div class="single-sidebar-widget user-info-widget">
-              <img src="{% static 'img/blog/user-info.png" alt="" />
+              <img src="{% static 'img/blog/user-info.png' %}" alt="" />
               <a href="#"><h4>Charlie Barber</h4></a>
               <p>Senior blog writer</p>
               <ul class="social-links">
