@@ -10,10 +10,16 @@ def blog_view(request):
     return render(request,'blog/blog-home.html',context)
 
 def blog_single(request,pid):
+    
     posts=Post.objects.filter(status=1)
-    post=get_object_or_404(posts,pk=pid)
+    post=get_object_or_404(posts ,pk=pid)
+    
+    previous_post=Post.objects.filter(published_date__lt=post.published_date).order_by('-published_date').first()
+    next_post=Post.objects.filter(published_date__gt=post.published_date).order_by('published_date').first()
+    
     post.counted_view=post.counted_view+1
     post.save()
-    context={'post': post}
+    context={'post': post, 'previous_post':previous_post , 'next_post':next_post}
+    
     return render(request,'blog/blog-single.html',context)
 
