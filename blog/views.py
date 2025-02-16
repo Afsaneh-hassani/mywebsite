@@ -11,7 +11,7 @@ def blog_view(request):
 
 def blog_single(request,pid):
     
-    posts=Post.objects.filter(status=1)
+    posts=Post.objects.filter(published_date__lte=timezone.now(),status=1)
     post=get_object_or_404(posts ,pk=pid)
     
     previous_post=Post.objects.filter(created_date__gt=post.created_date,published_date__lte=timezone.now(),status=1 ).order_by('created_date').first()
