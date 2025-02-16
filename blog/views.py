@@ -14,8 +14,8 @@ def blog_single(request,pid):
     posts=Post.objects.filter(status=1)
     post=get_object_or_404(posts ,pk=pid)
     
-    previous_post=Post.objects.filter(published_date__lt=post.published_date).order_by('-published_date').first()
-    next_post=Post.objects.filter(published_date__gt=post.published_date).order_by('published_date').first()
+    previous_post=Post.objects.filter(created_date__gt=post.created_date).order_by('created_date').first()
+    next_post=Post.objects.filter(created_date__lt=post.created_date).order_by('-created_date').first()
     
     post.counted_view=post.counted_view+1
     post.save()
