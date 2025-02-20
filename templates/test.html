@@ -1,0 +1,19 @@
+{% load blog-tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing page</title>
+</head>
+<body>
+    
+    {% posts as totalposts %}
+    {% for post in totalposts %}
+    <p>{{post.content|snippet:40}} </p>
+
+    {%endfor%}
+
+    {% popularpost %}
+</body>
+</html>
