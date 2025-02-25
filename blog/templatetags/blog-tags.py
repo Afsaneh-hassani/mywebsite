@@ -35,6 +35,10 @@ def postcategories():
         
     return {'categories':cat_dict}    
     
-    
+@register.inclusion_tag('website/latestposts.html')
+def latestpostshome(args=6):
+    posts=Post.objects.filter(status=1).order_by('published_date')
+    return {'posts':posts}
+
    
 
