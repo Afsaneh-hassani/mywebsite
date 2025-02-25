@@ -1,4 +1,4 @@
-{% load blog-tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +7,21 @@
     <title>Testing page</title>
 </head>
 <body>
-    
-    {% posts as totalposts %}
-    {% for post in totalposts %}
-    <p>{{post.content|snippet:40}} </p>
+    <form action="{% url 'website:test'%}" method='post'>
+        {% csrf_token %}
+        <label>name:</label>
+        <input name='name' type='text'><br>
+        <label>email:</label>
+        <input name='email' type='email', null=True><br>
+        <label>subject:</label>
+        <input name='subject' type='text'><br>
+        <label>message:</label>
+        <input name='message' type='text'><br>
+        <button type="submit">submit</button>
 
-    {%endfor%}
+    </form>
 
-    {% popularpost %}
+
+
 </body>
 </html>

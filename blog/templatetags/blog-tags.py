@@ -1,6 +1,7 @@
 from django import template
 from blog.models import Post
 from blog.models import Category
+from django.utils import timezone
 register=template.Library()
 
 @register.simple_tag(name='totalposts')
@@ -37,7 +38,7 @@ def postcategories():
     
 @register.inclusion_tag('website/latestposts.html')
 def latestpostshome(args=6):
-    posts=Post.objects.filter(status=1).order_by('published_date')
+    posts=Post.objects.filter(published_date__lte=timezone.now(),status=1).order_by('-created_date')
     return {'posts':posts}
 
    

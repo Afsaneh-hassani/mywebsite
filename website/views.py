@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from website.models import Contact
 
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
@@ -11,3 +12,21 @@ def about_view(request):
 
 def contact_view(request):
     return render(request,'website/contact.html')
+
+def test_view(request):
+    if request.method=='POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        subject=request.POST.get('subject')
+        message=request.POST.get('message')
+        c = Contact()
+        c.name=name
+        c.email=email
+        c.subject=subject
+        c.message=message
+        c.save()
+        
+       
+        print(name,email,subject,message)
+
+    return render(request, 'test.html',{})

@@ -22,7 +22,7 @@
                 <li> <a href='{% url 'blog:category' cat_name=cat.name %}'> {{cat.name}}</a> </li>
                 {%endfor%}
               </div>
-              <a href="#"><h4 class="title">{{post.title}}</h4></a>
+              <a href="{% url 'blog:single' pid=post.id %}"><h4 class="title">{{post.title}}</h4></a>
               <p>{{post.content|truncatewords:20}}</p>
               <h6 class="date">{{post.published_date|date:'d M Y'}}</h6>
             </div>
