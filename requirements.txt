@@ -2,4 +2,8 @@ asgiref==3.8.1
 Django==5.1.4
 sqlparse==0.5.3
 tzdata==2024.2
- pillow
+pillow
+django-robots
+django-debug-toolbar
+django-taggit==6.1.0
+django-summernote==0.8.20.0

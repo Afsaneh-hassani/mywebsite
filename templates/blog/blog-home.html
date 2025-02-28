@@ -114,7 +114,7 @@
                 <img class="img-fluid" src="{{post.image.url}}" alt="" />
               </div>
               <a class="posts-title" href={% url 'blog:single' pid=post.id %}><h3>{{post.title}}</h3></a>
-              <p class="excert">{{post.content|truncatewords:20}}
+              <p class="excert">{{post.content|truncatewords:20|safe}}
                 
                 {{post.image.url}}
               </p>
