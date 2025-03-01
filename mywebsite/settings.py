@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,7 +64,10 @@ SUMMERNOTE_THEME = 'bs4'
 
 
 
-
+# captcha admin setting
+#MULTI_CAPTCHA_ADMIN = {
+ #   'engine': 'simple-captcha',
+#}
 
 
 
