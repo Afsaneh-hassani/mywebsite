@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from blog.models import Post, Comment
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from blog.forms import CommentForm
+from django.contrib.auth import authenticate
 
 # Create your views here.
 def blog_view(request,**kwargs):
@@ -39,17 +41,21 @@ def blog_single(request,pid):
 
     posts=Post.objects.filter(published_date__lte=timezone.now(),status=1)
     post=get_object_or_404(posts ,pk=pid)
-    comments=Comment.objects.filter(post=post.id, approved=True)
-    previous_post=Post.objects.filter(created_date__gt=post.created_date,published_date__lte=timezone.now(),status=1 ).order_by('created_date').first()
-    next_post=Post.objects.filter(created_date__lt=post.created_date,published_date__lte=timezone.now(),status=1 ).order_by('-created_date').first()
+    if not post.login_requires or request.user.is_authenticated:
+        comments=Comment.objects.filter(post=post.id, approved=True)
+        previous_post=Post.objects.filter(created_date__gt=post.created_date,published_date__lte=timezone.now(),status=1 ).order_by('created_date').first()
+        next_post=Post.objects.filter(created_date__lt=post.created_date,published_date__lte=timezone.now(),status=1 ).order_by('-created_date').first()
     
-    post.counted_view=post.counted_view+1
-    post.save()
-    form=CommentForm()
-    context={'post': post, 'previous_post':previous_post , 'next_post':next_post,'comments':comments,'form':form}
+        post.counted_view=post.counted_view+1
+        post.save()
+        form=CommentForm()
+        context={'post': post, 'previous_post':previous_post , 'next_post':next_post,'comments':comments,'form':form}
     
-    return render(request,'blog/blog-single.html',context)
+        return render(request,'blog/blog-single.html',context)
+    else:
+        return HttpResponseRedirect(reverse('accounts:login'))
 
+        
 def test(request):
     return render(request,'test.html')
 
