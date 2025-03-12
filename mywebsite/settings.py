@@ -19,16 +19,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f8&_$fi+$oudui)6k7t34bsjg7sa6om+@rb%zxu9f6!m6dd!99'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -55,8 +45,6 @@ INSTALLED_APPS = [
 ]
 
 
-#site frameworks
-SITE_ID=2
 
 #robots
 ROBOTS_USE_HOST=True
@@ -107,15 +95,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -174,14 +153,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT= BASE_DIR/'static'
+
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT= BASE_DIR/'media'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "statics",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -195,4 +170,3 @@ INTERNAL_IPS = [
 
 
 
-X_FRAME_OPTION='SAMEORIGIN'

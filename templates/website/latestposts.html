@@ -23,7 +23,7 @@
                 {%endfor%}
               </div>
               <a href="{% url 'blog:single' pid=post.id %}"><h4 class="title">{{post.title}}</h4></a>
-              <p>{{post.content|truncatewords:20}}</p>
+              <p>{{post.content|truncatewords:20|safe}}</p>
               <h6 class="date">{{post.published_date|date:'d M Y'}}</h6>
             </div>
           </div>
