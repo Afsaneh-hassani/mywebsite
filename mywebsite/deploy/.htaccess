@@ -1,0 +1,9 @@
+RewriteEngine On
+
+
+RewriteCond %{HTTP_HOST} ^www\.127.0.0\.1 [NC]
+RewriteRule ^(.*)$ https://127.0.0.1/ $1 [L,R=301]
+
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ http://127.0.0.1/ $1 [L,R=301]
